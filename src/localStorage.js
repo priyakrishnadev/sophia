@@ -1,6 +1,6 @@
 export const loadState=()=>{
   try{
-    const serializedState=localStorage.getItem('state');
+    const serializedState=localStorage.getItem('productComments');
     if(serializedState === null){
       return undefined;
     }
@@ -11,10 +11,11 @@ export const loadState=()=>{
   }
 };
 
-export const saveState=(state,user)=>{
+export const saveState=(key,state)=>{
   try{
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('state',serializedState);
+    // localStorage.setItem('productComments',serializedState);
+    localStorage.setItem(key,serializedState);
   }
   catch(err){
   }

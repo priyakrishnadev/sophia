@@ -479,9 +479,10 @@ THREE.OBJLoader.prototype = {
 				var value = result[ 1 ].trim().toLowerCase();
 				state.object.material.smooth = ( value === '1' || value === 'on' );
 
-			} else {
+			}
+			 else {
 
-				// Handle null terminated files without exception
+				// // Handle null terminated files without exception
 				if ( line === '\0' ) continue;
 
 				throw new Error( "Unexpected line: '" + line  + "'" );

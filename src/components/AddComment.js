@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import submit from '../actions/commentActions'
-
+import {connect} from 'react-redux';
+import {commentPush} from '../actions/commentActions'
 
 const validate = values => {
   const errors = {}
@@ -13,18 +13,14 @@ const validate = values => {
 
   if (!values.message) {
     errors.message = 'Required !!'
-  }else if (values.message.length > 15) {
-    errors.message = 'Must be 15 characters or less'
   }else {
     var bad_words_array=new Array("wtf","lol","terrorist","hell","terrorism","f**k","jihad","fuck","adsf","asdf","qwert");
-    var alert_count=0;
     var compare_text=values.message;
     for(var i=0; i<bad_words_array.length; i++)
     {
       for(var j=0; j<(values.message.length); j++)
       {
-        if(bad_words_array[i]==compare_text.
-        substring(j,(j+bad_words_array[i].length)).toLowerCase())
+        if(bad_words_array[i]==compare_text.substring(j,(j+bad_words_array[i].length)).toLowerCase())
         {
         errors.message = 'Your message contains inappropriate words.Please Clean it Up.'
         }
@@ -65,13 +61,16 @@ const renderTextAreaField = ({
   </div>
 )
 
+function callCommentPush(values, dispatch) {
+ return dispatch(commentPush(values));
+}
 
 const AddComment = props => {
-const { error,handleSubmit, pristine, reset, submitting } = props;
+const { error,handleSubmit, pristine, submitting } = props;
   return (
       <div className="leaveComment pb-2">
 
-        <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit(callCommentPush)}>
             <Field
               name="email"
               component={renderField}
@@ -102,7 +101,9 @@ const { error,handleSubmit, pristine, reset, submitting } = props;
   );
 };
 
-export default reduxForm({
-  form: 'addcommentmsg', // a unique identifier for this form  simple=addcommentmsg
-  validate
-})(AddComment);
+
+export default connect( null, {onSubmit: callCommentPush})
+(reduxForm({
+      form: "AddComment",
+      validate
+    })( AddComment ));

@@ -1,66 +1,91 @@
 import React from "react";
 import classnames from 'classnames';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {commentLike} from '../actions/commentActions';
+import {getComments,upVotePoll,downVotePoll} from '../actions/commentActions';
 import axios from 'axios';
+import TimeAgo from 'timeago-react';
 
 class CommentList extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={
-      like:0
-    }
+
+  constructor(props) {
+   super(props);
+   this.state = {
+     localVote: false
+   }
+   this.handleUpvoteClicked = this.handleUpvoteClicked.bind(this);
+ }
+
+handleUpvoteClicked(id,voteStatus,like,product) {
+  if(voteStatus === false){
+    this.setState({localVote:true});
+    this.props.upVotePoll(id,voteStatus,like,product);
+  }else{
+    this.setState({localVote:true});
+    this.props.downVotePoll(id,voteStatus,like,product);
   }
+}
+
+componentDidMount(){
+// this.props.getComments()
+this.props.getComments(this.props.page,this.props.pageId)
+}
+
+componentWillReceiveProps(nextProps){
+  // if(nextProps.page != this.props.page || nextProps.pageId != this.props.pageId){
+  //   this.props.getComments(this.props.page,this.props.pageId)
+  // }
+  this.setState({
+      localVote:false
+    });
+}
 
   render(){
     return(
-      <div className="commentSection scrollBar bg-white">
-        <ul>
-          {this.props.comment.map( (comment, key) =>
-            <li key={comment.id}>
-            <div className="row mx-0 border py-2 px-2">
-              <div className="userComments col-sm-3 col-md-3 col-lg-3 noPadding">
-              <img src="../../img/useravatar.png" className="img-circle rounded-circle border" alt="" width="100%" height="64px" />
-              </div>
-              <div className="userInfo col-sm-9 col-md-9 col-lg-9 noPadding">
-                <h6>{comment.name}<span className="float-right text-grey commentedTime">{comment.time}</span></h6>
-                <p className="userComment">{comment.comment}</p>
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-12 pr-0">
-                {/*<span className={classnames('float-right text-grey like', comment.likes > 0 && 'text-info' )} onClick={this.onClick}>*/}
-                <span className={classnames('float-right text-grey like', this.props.commentHit.enabled === true && 'text-info' )}
-                  onClick={()=>this.props.commentLike(comment.id,comment.likes)}>
-                  <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                  {(comment.id == this.props.commentHit.id)?
-                    this.props.commentHit.payload :
-                    comment.likes
-                  }
-                </span>
-              </div>
-              </div>
-            </li>
-          )}
-        </ul>
+      <div>
+        <div className="commentHeader bg-white border-0 text-center py-2">
+          <h4 className="px-2">{this.props.comments && this.props.comments.length} Comments</h4>
+        </div>
+        <div className="commentSection scrollBar bg-white">
+          <ul>
+            {this.props.comments && this.props.comments.slice(0).reverse().map( (comment, key) =>
+              <li key={comment.id}>
+                <div className="row mx-0 border py-2 px-2">
+                  <div className="userComments col-sm-3 col-md-3 col-lg-3 noPadding">
+                    <img src={`http://127.0.0.1:8000/${comment.avatar}`} className="img-circle rounded-circle border" alt="" width="100%" height="64px" />
+                  </div>
+                  <div className="userInfo col-sm-9 col-md-9 col-lg-9 noPadding">
+                    <h6>{comment.name}</h6>
+                    <p className="userComment">{comment.message}</p>
+                  </div>
+                  <div className="col-sm-8 col-md-8 col-lg-8 pl-1">
+                    <span className="text-grey commentedTime">
+                      <TimeAgo datetime={comment.created_at} locale='en' />
+                    </span>
+                  </div>
+                  <div className="col-sm-4 col-md-4 col-lg-4 pr-0">
+                    <button className={classnames('float-right text-grey like',
+                    comment.voteStatus === true && 'text-primary glow' )}
+                    disabled={this.state.localVote}
+                    onClick={()=>{this.handleUpvoteClicked(comment.id,comment.voteStatus,comment.likes,comment.product)}}
+                    > <i className="fa fa-thumbs-o-up" aria-hidden="true"></i> {comment.likes}
+                    </button>
+                  </div>
+                </div>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps (state) {
-  // console.log(state.commentsHits);
-  return {
-    commentHit: state.commentsHits
-  }
+function mapStateToProps(state){
+  console.log(state.comments.comments);
+  return{
+    comments:state.comments.comments,
+    // upVotes:state.upVotes
+  };
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({commentLike}, dispatch);
-}
-
-// function mapDispatchToProps (dispatch) {
-//   return {
-//     onClick: (id) => dispatch(commentLike(id))
-//   }
-// }
-export default connect(mapStateToProps,mapDispatchToProps)(CommentList);
+export default connect(mapStateToProps,{getComments,upVotePoll,downVotePoll})(CommentList);

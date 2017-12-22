@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux'
 import auth from './auth'
-import commentReducer from './commentReducer'
+import productComments from './productComments'
+import categoryReducer from './categoryReducer'
+import productReducer from './productReducer'
 import { reducer as reduxFormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
   auth,
-  commentsHits:commentReducer,
+  comments: productComments,
+  category: categoryReducer,
+  products: productReducer,
   form: reduxFormReducer
 });
 

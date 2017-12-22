@@ -7,8 +7,10 @@ import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import NotFound from './NotFound';
 import {SmartView} from './SmartView';
-import {WebVR} from './WebVR';
+import ProductInformation from './ProductInformation';
+ // import WebVR from './WebVR';
 import requireAuth from '../utils/requireAuth';
+import productHOC from '../utils/productHOC';
 
 const Routes = () => (
     <Switch>
@@ -16,8 +18,14 @@ const Routes = () => (
       <Route path="/admindashboard" component={requireAuth(App)}/>
       <Route path="/ForgotPassword" component={ForgotPassword}/>
       <Route path="/resetpassword" component={ResetPassword}/>
+    {/*
       <Route path="/WebVR" component={WebVR}/>
-      <Route path="/SmartView/:page?/:pageId?" component={SmartView}/>
+      <Route path="/SmartView/:page?/:pageId?" component={productHOC(SmartView)}/>
+      
+    */}
+    <Route path="/SmartView/:page?/:pageId?" component={SmartView}/>
+
+      <Route path="/ProductInformation" component={ProductInformation}/>
       <Route path="*" component={NotFound} />
     </Switch>
 );

@@ -8,8 +8,8 @@
 	overflow: hidden;
 	cursor: -webkit-grab; cursor: -moz-grab;
 	/*newly added*/
-	width:100% !important;
-	height:405px !important;
+	/*width:100% !important;
+	height:405px !important;*/
 }
 
 #container123:active{

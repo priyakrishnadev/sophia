@@ -1,6 +1,6 @@
 import React from 'react';
-import {SmartProduct} from './SmartProduct';
-import {SmartCategory} from './SmartCategory';
+import SmartProduct from './SmartProduct';
+import SmartCategory from './SmartCategory';
 
 export class SmartView extends React.Component{
 render(){

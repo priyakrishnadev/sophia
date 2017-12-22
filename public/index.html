@@ -4,17 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="image/*; charset=UTF-8">
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="/css/style.css" rel="stylesheet">
-    <!-- <link href="/js/simpleload.css" rel="stylesheet" />
-    <link href="/js/videolist.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="%PUBLIC_URL%/css/font-awesome.min.css" rel="stylesheet">
+    <link href="%PUBLIC_URL%/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <!-- <link href="%PUBLIC_URL%/js/simpleload.css" rel="stylesheet">
+    <link href="%PUBLIC_URL%/js/videolist.css" rel="stylesheet"> -->
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -26,22 +31,46 @@
     -->
     <title>Smart View</title>
   </head>
-  <body>
+  <body id="mainWrapper">
     <div id="root"></div>
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  <!-- <script src="/js/pace.min.js"></script>
-  <script src="/js/omni.min.js"></script>
-	<script src="/js/orbitcontrols.js"></script>
-	<script src="/js/Detector.js"></script>
-	<script src="/js/stats.min.js"></script>
-	<script src="/js/dat.gui.js"></script>
-	<script src="/js/fullScreen.js"></script>
-	<script src="/js/OBJLoader.js"></script>
-	<script src="/js/projector.js"></script>
-	<script src="/js/MTLLoader.js"></script>
-	<script src="/js/tween.min.js"></script>
-	<script src="/js/videolist1.js"></script> -->
+  <script src="%PUBLIC_URL%/js/jquery-slim.min.js"></script>
+  <script src="%PUBLIC_URL%/js/tether.min.js"></script>
+  <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.js"></script>
+
+    <!-- <script src="%PUBLIC_URL%/js/pace.min.js"></script>
+    <script src="%PUBLIC_URL%/js/omni.min.js"></script>
+  	 <script src="%PUBLIC_URL%/js/orbitcontrols.js"></script>
+  	<script src="%PUBLIC_URL%/js/Detector.js"></script>
+  	<script src="%PUBLIC_URL%/js/stats.min.js"></script>
+  	<script src="%PUBLIC_URL%/js/dat.gui.js"></script>
+  	<script src="%PUBLIC_URL%/js/fullScreen.js"></script> -->
+  	<!-- <script src="%PUBLIC_URL%/js/OBJLoader.js"></script> -->
+  	<!-- <script src="https://cdn.rawgit.com/priyakrishnadev/objload1/master/obloader.js"></script>
+
+  	 <script src="%PUBLIC_URL%/js/projector.js"></script>
+  	<script src="%PUBLIC_URL%/js/MTLLoader.js"></script>
+  	<script src="%PUBLIC_URL%/js/tween.min.js"></script>
+    <script src="%PUBLIC_URL%/js/videolist1.js"></script> -->
+    <!-- <script>
+      setTimeout(function(){
+        const script1 = document.createElement("script");
+        script1.type = "text/javascript";
+        script1.src = "%PUBLIC_URL%/utils/DDSLoader.js";
+        script1.async = true;
+         document.body.appendChild(script1);
+        const script2 = document.createElement("script");
+        script2.type = "text/javascript";
+        script2.src = "%PUBLIC_URL%/utils/MTLLoader.js";
+        script2.async = true;
+         document.body.appendChild(script2);
+        const script3 = document.createElement("script");
+        script3.type = "text/javascript";
+        script3.src = "%PUBLIC_URL%/utils/OBJLoader.js";
+        script3.async = true;
+         document.body.appendChild(script3);
+      }, 5000);
+    </script> -->
+
   </body>
 </html>
